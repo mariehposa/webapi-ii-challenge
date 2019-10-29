@@ -1,4 +1,14 @@
 const express = require('express');
-const cors = require ('cors');
+const server = express();
+const router = require('./routers/routers')
+server.use(express.json());
 
-const server = express()
+server.use('/api/posts', router)
+
+server.get('*', handleDefaultRequest)
+
+function handleDefaultRequest (req, res) {
+    res.json("Hello there")
+}
+
+module.exports = server;
